@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tax.mystar.kondha">
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="23" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ScreenSlidePagerActivity"
+            android:label="ScreenSlidePagerActivity"></activity>
+
+        <activity android:name=".ContentActivity"
+            android:label="ContentActivity"></activity>
+
+        <!--  distiguish     distiguish      distiguish    -->
+
+
+        <activity
+            android:name=".alarm.AlarmActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        <service
+            android:process="alarm.serviceProcess"
+            android:name=".service.AlarmService"
+
+            >
+        </service>
+        <!--android:icon="@mipmap/ic_launcher"-->
+        <!--android:label="@string/app_name"-->
+        <receiver android:name=".service.AlarmServiceBroadcastReciever" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".alert.AlarmAlertBroadcastReciever" >
+        </receiver>
+        <receiver android:name = ".telepony.PhoneStateChangedBroadcastReciever">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name = ".alert.AlarmAlertActivity"
+            android:label="Alarm alert"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name = ".alert.ReminderAlertActivity"
+            android:label="Alarm alert"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".preference.AlarmPreferencesActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="alarm.AlarmActivity" >
+            <!-- Parent activity meta-data to support API level 7+ -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="alarm.AlarmActivity" />
+        </activity>
+    </application>
+
+</manifest>
